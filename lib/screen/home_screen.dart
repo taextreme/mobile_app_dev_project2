@@ -22,7 +22,12 @@ class _HomeScreenState extends State<HomeScreen> {
           title: const Text('THAILAND DAILY FORECAST'),
         ),
         body: Column(
-          children: <Widget>[createLogoBaseCard(forecast)],
+          children: <Widget>[
+            createLogoBaseCard(forecast),
+            BaseCard(
+                theColor: Colors.white,
+                theChild: Text(forecast.overallDescriptionEnglish))
+          ],
         ));
   }
 

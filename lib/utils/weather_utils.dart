@@ -3,7 +3,7 @@ import 'package:weather_icons/weather_icons.dart';
 
 IconData getWeatherIconFromData(String data) {
   data = data.toLowerCase();
-  IconData iconData;
+  IconData iconData = WeatherIcons.alien;
   if (data.contains("rain")) {
     iconData = WeatherIcons.rain;
   } else if (data.contains("rain") && data.contains("wind")) {
@@ -24,8 +24,6 @@ IconData getWeatherIconFromData(String data) {
     iconData = WeatherIcons.day_sunny_overcast;
   } else if (data.contains("windy")) {
     iconData = WeatherIcons.day_windy;
-  } else {
-    iconData = WeatherIcons.alien;
   }
   return iconData;
 }

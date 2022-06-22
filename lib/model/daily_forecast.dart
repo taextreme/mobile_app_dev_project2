@@ -4,7 +4,7 @@ class DailyForecast {
   final String date;
   final String overallDescriptionThai;
   final String overallDescriptionEnglish;
-  final List<RegionForecast> regionsForecast;
+  final List<dynamic> regionsForecast;
 
   const DailyForecast({
     required this.date,
@@ -70,7 +70,7 @@ class DailyForecast {
       date: map['Date'] as String,
       overallDescriptionThai: map['OverallDescriptionThai'] as String,
       overallDescriptionEnglish: map['OverallDescriptionEnglish'] as String,
-      regionsForecast: map['RegionsForecast'] as List<RegionForecast>,
+      regionsForecast: map['RegionsForecast']['RegionForecast'],
     );
   }
 }
