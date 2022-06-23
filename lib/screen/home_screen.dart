@@ -21,12 +21,19 @@ class _HomeScreenState extends State<HomeScreen> {
         appBar: AppBar(
           title: const Text('THAILAND DAILY FORECAST'),
         ),
-        body: Column(
+        body: ListView(
           children: <Widget>[
             createLogoBaseCard(forecast),
             BaseCard(
                 theColor: Colors.white,
-                theChild: Text(forecast.overallDescriptionEnglish))
+                theChild: Container(
+                    alignment: Alignment.topCenter,
+                    child: Text(forecast.date,
+                        style: const TextStyle(fontSize: 30)))),
+            BaseCard(
+                theColor: Colors.white,
+                theChild: Text(forecast.overallDescriptionEnglish,
+                    style: const TextStyle(fontSize: 18)))
           ],
         ));
   }
@@ -35,6 +42,16 @@ class _HomeScreenState extends State<HomeScreen> {
     String description = regionForecast.overallDescriptionEnglish;
     IconData icon = getWeatherIconFromData(description);
     Color color = Colors.black54; // TODO: add logic for color selection
-    return BaseCard(theColor: color, theChild: Icon(icon, color: Colors.white));
+    return BaseCard(
+        theColor: color,
+        theChild: Container(
+            alignment: Alignment.topCenter,
+            height: 300,
+            width: 300,
+            child: Icon(
+              icon,
+              color: Colors.white,
+              size: 200.0,
+            )));
   }
 }

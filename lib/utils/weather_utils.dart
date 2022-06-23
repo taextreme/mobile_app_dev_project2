@@ -3,14 +3,17 @@ import 'package:weather_icons/weather_icons.dart';
 
 IconData getWeatherIconFromData(String data) {
   data = data.toLowerCase();
-  IconData iconData = WeatherIcons.alien;
-  if (data.contains("rain")) {
+  IconData iconData = WeatherIcons.cloud;
+  if (data.contains("rain") || data.contains("rains")) {
     iconData = WeatherIcons.rain;
   } else if (data.contains("rain") && data.contains("wind")) {
     iconData = WeatherIcons.rain_wind;
   } else if (data.contains("storm")) {
     iconData = WeatherIcons.storm_showers;
   } else if (data.contains("thunder") && data.contains("storm")) {
+    iconData = WeatherIcons.thunderstorm;
+  } else if (data.contains("thundershower") ||
+      data.contains("thundershowers")) {
     iconData = WeatherIcons.thunderstorm;
   } else if (data.contains("cloudy")) {
     iconData = WeatherIcons.cloudy;
