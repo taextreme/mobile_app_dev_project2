@@ -30,3 +30,23 @@ IconData getWeatherIconFromData(String data) {
   }
   return iconData;
 }
+
+Color chooseColorFromIcon(IconData icon) {
+  if (icon == WeatherIcons.rain || icon == WeatherIcons.rain_wind) {
+    return Colors.lightBlue;
+  } else if (icon == WeatherIcons.cloudy ||
+      icon == WeatherIcons.cloudy_windy ||
+      icon == WeatherIcons.cloudy_gusts) {
+    return Colors.grey;
+  } else if (icon == WeatherIcons.storm_showers ||
+      icon == WeatherIcons.thunderstorm) {
+    return Colors.blueGrey;
+  } else if (icon == WeatherIcons.day_sunny ||
+      icon == WeatherIcons.day_sunny_overcast) {
+    return Colors.deepOrange;
+  } else if (icon == WeatherIcons.windy || icon == WeatherIcons.wind) {
+    return Colors.lightGreen;
+  } else {
+    return Colors.black54;
+  }
+}
