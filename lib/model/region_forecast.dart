@@ -69,4 +69,13 @@ class RegionForecast {
       descriptionEnglish: map['DescriptionEnglish'] as String,
     );
   }
+
+  factory RegionForecast.fromJson(dynamic json) {
+    return RegionForecast(
+      regionNameThai: json['RegionNameThai'] as String,
+      regionNameEnglish: json['RegionNameEnglish'] as String,
+      descriptionThai: json['DescriptionThai'] as String,
+      descriptionEnglish: json['DescriptionEnglish'] as String,
+    );
+  }
 }

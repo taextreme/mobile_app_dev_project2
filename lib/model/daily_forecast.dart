@@ -70,8 +70,21 @@ class DailyForecast {
       date: map['Date'] as String,
       overallDescriptionThai: map['OverallDescriptionThai'] as String,
       overallDescriptionEnglish: map['OverallDescriptionEnglish'] as String,
-      regionsForecast:
-          map['RegionsForecast']['RegionForecast'].cast<RegionForecast>(),
+      regionsForecast: map['RegionsForecast'] as List<RegionForecast>,
+    );
+  }
+
+  factory DailyForecast.fromJson(dynamic data) {
+    List<dynamic> regionsJson = data['RegionsForecast']['RegionForecast'];
+    List<RegionForecast> regions = [];
+    for (var element in regionsJson) {
+      regions.add(RegionForecast.fromJson(element));
+    }
+    return DailyForecast(
+      date: data['Date'] as String,
+      overallDescriptionThai: data['OverallDescriptionThai'] as String,
+      overallDescriptionEnglish: data['OverallDescriptionEnglish'] as String,
+      regionsForecast: regions,
     );
   }
 }
