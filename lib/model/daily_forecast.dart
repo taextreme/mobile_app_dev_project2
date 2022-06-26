@@ -73,4 +73,13 @@ class DailyForecast {
       regionsForecast: map['RegionsForecast'] as List<RegionForecast>,
     );
   }
+
+  factory DailyForecast.fromJson(Map<String, dynamic> json) {
+    return DailyForecast(
+        date: json["DailyForecast"]["Date"] as String,
+        overallDescriptionThai: json["DailyForecast"]["DescTh"] as String,
+        overallDescriptionEnglish: json["DailyForecast"]["DescEng"] as String,
+        regionsForecast: json["DailyForecast"]["RegionsForecast"] as List<RegionForecast>,
+    );
+  }
 }
