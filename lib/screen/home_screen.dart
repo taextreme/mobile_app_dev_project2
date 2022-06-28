@@ -38,9 +38,12 @@ class _HomeScreenState extends State<HomeScreen> {
               child:
                   Text(forecast.date, style: const TextStyle(fontSize: 30)))),
       Container(
-          color: Colors.white,
+          color: Colors.white60,
           child: Text(forecast.overallDescriptionEnglish,
-              style: const TextStyle(fontSize: 18))),
+              style: const TextStyle(fontSize: 20))),
+      const SizedBox(height: 20),
+      const Text("Regions Forecast",
+          textAlign: TextAlign.center, style: TextStyle(fontSize: 28)),
     ];
     body.addAll(getRegionBaseCards(forecast.regionsForecast));
     return body;
@@ -63,20 +66,27 @@ class _HomeScreenState extends State<HomeScreen> {
             )));
   }
 
-  List<BaseCard> getRegionBaseCards(List<RegionForecast> data) {
-    List<BaseCard> list = [];
+  List<Widget> getRegionBaseCards(List<RegionForecast> data) {
+    List<Widget> list = [];
     List<Color> colors = [
       Colors.red,
       Colors.orange,
       Colors.yellow,
       Colors.green,
-      Colors.lightBlue,
       Colors.blue,
-      Colors.purple
+      Colors.indigo,
+      Colors.deepPurple
     ];
     for (var i = 0; i < data.length; i++) {
-      list.add(BaseCard(
-          theColor: colors[i], theChild: Text(data[i].regionNameEnglish)));
+      list.add(SizedBox(
+          height: 100,
+          child: BaseCard(
+              theColor: colors[i],
+              theChild: Container(
+                  alignment: Alignment.center,
+                  child: Text(data[i].regionNameEnglish,
+                      style: const TextStyle(
+                          fontSize: 22, color: Colors.black))))));
     }
     return list;
   }
