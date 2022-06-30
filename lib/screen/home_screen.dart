@@ -30,7 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   List<Widget> createHomePageBody(DailyForecast forecast) {
     List<Widget> body = <Widget>[
-      createLogoBaseCard(forecast),
+      createLogoBaseCard(forecast.overallDescriptionEnglish),
       Container(
           color: Colors.white,
           child: Container(
@@ -49,23 +49,6 @@ class _HomeScreenState extends State<HomeScreen> {
     return body;
   }
 
-  BaseCard createLogoBaseCard(DailyForecast regionForecast) {
-    String description = regionForecast.overallDescriptionEnglish;
-    IconData icon = getWeatherIconFromData(description);
-    Color color = chooseColorFromIcon(icon);
-    return BaseCard(
-        theColor: color,
-        theChild: Container(
-            alignment: Alignment.topCenter,
-            height: 300,
-            width: 300,
-            child: Icon(
-              icon,
-              color: Colors.white,
-              size: 200.0,
-            )));
-  }
-
   List<Widget> getRegionBaseCards(List<RegionForecast> data) {
     List<Widget> list = [];
     List<Color> colors = [
@@ -78,15 +61,15 @@ class _HomeScreenState extends State<HomeScreen> {
       Colors.deepPurple
     ];
     for (var i = 0; i < data.length; i++) {
+      RegionForecast regionForecast = data[i];
       list.add(SizedBox(
           height: 100,
           child: BaseCard(
               theColor: colors[i],
               theChild: Container(
                   alignment: Alignment.center,
-                  child: Text(data[i].regionNameEnglish,
-                      style: const TextStyle(
-                          fontSize: 22, color: Colors.black))))));
+                  child: Text(regionForecast.regionNameEnglish,
+                      style: const TextStyle(fontSize: 22))))));
     }
     return list;
   }
