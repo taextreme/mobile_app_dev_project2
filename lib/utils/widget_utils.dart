@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:weather_icons/weather_icons.dart';
 
+import '../component/base_card.dart';
+
 IconData getWeatherIconFromData(String data) {
   data = data.toLowerCase();
   IconData iconData = WeatherIcons.cloud;
@@ -49,4 +51,21 @@ Color chooseColorFromIcon(IconData icon) {
   } else {
     return Colors.black54;
   }
+}
+
+BaseCard createLogoBaseCard(String description) {
+  String descriptionLower = description.toLowerCase();
+  IconData icon = getWeatherIconFromData(descriptionLower);
+  Color color = chooseColorFromIcon(icon);
+  return BaseCard(
+      theColor: color,
+      theChild: Container(
+          alignment: Alignment.topCenter,
+          height: 300,
+          width: 300,
+          child: Icon(
+            icon,
+            color: Colors.white,
+            size: 200.0,
+          )));
 }
