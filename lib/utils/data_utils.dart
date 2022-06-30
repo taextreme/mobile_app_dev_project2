@@ -6,7 +6,7 @@ import 'package:xml2json/xml2json.dart';
 DailyForecast dailyForecastFromXML(String xml) {
   final xmlJsonTransformer = Xml2Json();
   xmlJsonTransformer.parse(xml);
-  String jsonData = xmlJsonTransformer.toBadgerfish();
-  Map<String, dynamic> mapData = json.decode(jsonData);
-  return DailyForecast.fromMap(mapData);
+  String jsonData = xmlJsonTransformer.toParkerWithAttrs();
+  dynamic decodeData = json.decode(jsonData)["DailyForecast"];
+  return DailyForecast.fromJson(decodeData);
 }

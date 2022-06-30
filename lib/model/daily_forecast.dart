@@ -74,12 +74,26 @@ class DailyForecast {
     );
   }
 
+<<<<<<< HEAD
   factory DailyForecast.fromJson(Map<String, dynamic> json) {
     return DailyForecast(
         date: json["DailyForecast"]["Date"] as String,
         overallDescriptionThai: json["DailyForecast"]["DescTh"] as String,
         overallDescriptionEnglish: json["DailyForecast"]["DescEng"] as String,
         regionsForecast: json["DailyForecast"]["RegionsForecast"] as List<RegionForecast>,
+=======
+  factory DailyForecast.fromJson(dynamic data) {
+    List<dynamic> regionsJson = data['RegionsForecast']['RegionForecast'];
+    List<RegionForecast> regions = [];
+    for (var element in regionsJson) {
+      regions.add(RegionForecast.fromJson(element));
+    }
+    return DailyForecast(
+      date: data['Date'] as String,
+      overallDescriptionThai: data['OverallDescriptionThai'] as String,
+      overallDescriptionEnglish: data['OverallDescriptionEnglish'] as String,
+      regionsForecast: regions,
+>>>>>>> origin
     );
   }
 }
