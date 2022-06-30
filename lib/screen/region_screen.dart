@@ -4,11 +4,9 @@ import 'package:mobile_app_dev_project2/model/region_forecast.dart';
 import '../utils/widget_utils.dart';
 
 class RegionScreen extends StatefulWidget {
-  const RegionScreen({Key? key, required this.forecast, required this.date})
-      : super(key: key);
+  const RegionScreen({Key? key, required this.forecast}) : super(key: key);
 
   final RegionForecast forecast;
-  final String date;
 
   @override
   State<RegionScreen> createState() => _RegionScreenState();
