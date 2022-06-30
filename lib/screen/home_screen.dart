@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_app_dev_project2/component/base_card.dart';
 import 'package:mobile_app_dev_project2/model/daily_forecast.dart';
+import 'package:mobile_app_dev_project2/screen/region_screen.dart';
 import 'package:mobile_app_dev_project2/test_resources/test_forecast.dart';
 import 'package:mobile_app_dev_project2/utils/data_utils.dart';
 import 'package:mobile_app_dev_project2/utils/widget_utils.dart';
@@ -65,6 +66,11 @@ class _HomeScreenState extends State<HomeScreen> {
       list.add(SizedBox(
           height: 100,
           child: BaseCard(
+              theOnTapFunc: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return RegionScreen(forecast: regionForecast);
+                }));
+              },
               theColor: colors[i],
               theChild: Container(
                   alignment: Alignment.center,
