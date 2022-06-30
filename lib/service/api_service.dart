@@ -10,7 +10,7 @@ class ApiService {
     try {
       var response = await http.get(Uri.parse(dailyForecastUrl));
       if (response.statusCode == 200) {
-        DailyForecast dailyForecast = DailyForecast.fromJson(jsonDecode(response.body));
+        DailyForecast dailyForecast = DailyForecast.fromJson(jsonDecode(response.body)["DailyForecast"]);
         return dailyForecast;
       }
     }
