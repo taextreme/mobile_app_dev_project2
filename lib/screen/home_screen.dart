@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mobile_app_dev_project2/component/base_card.dart';
 import 'package:mobile_app_dev_project2/model/daily_forecast.dart';
 import 'package:mobile_app_dev_project2/screen/region_screen.dart';
-import 'package:mobile_app_dev_project2/test_resources/test_forecast.dart';
-import 'package:mobile_app_dev_project2/utils/data_utils.dart';
+import 'package:mobile_app_dev_project2/service/api_service.dart';
 import 'package:mobile_app_dev_project2/utils/widget_utils.dart';
 
 import '../model/region_forecast.dart';
@@ -16,10 +15,17 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  DailyForecast forecast = DailyForecast.empty();
+
+  _HomeScreenState() {
+    ApiService().fetchDailyForecast().then((value) => setState(() {
+          forecast = value;
+        }));
+  }
+
   @override
   Widget build(BuildContext context) {
-    DailyForecast forecast =
-        dailyForecastFromXML(dailyForecastTestData); // use test data
+    // use test data
     return Scaffold(
         appBar: AppBar(
           title: const Text('THAILAND DAILY FORECAST'),

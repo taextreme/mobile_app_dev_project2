@@ -29,6 +29,8 @@ IconData getWeatherIconFromData(String data) {
     iconData = WeatherIcons.day_sunny_overcast;
   } else if (data.contains("windy")) {
     iconData = WeatherIcons.day_windy;
+  } else if (data.contains("error")) {
+    iconData = WeatherIcons.alien;
   }
   return iconData;
 }
@@ -48,6 +50,8 @@ Color chooseColorFromIcon(IconData icon) {
     return Colors.deepOrange;
   } else if (icon == WeatherIcons.windy || icon == WeatherIcons.wind) {
     return Colors.lightGreen;
+  } else if (icon == WeatherIcons.alien) {
+    return Colors.red.shade900;
   } else {
     return Colors.black54;
   }
