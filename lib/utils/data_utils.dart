@@ -10,3 +10,7 @@ DailyForecast dailyForecastFromXML(String xml) {
   dynamic decodeData = json.decode(jsonData)["DailyForecast"];
   return DailyForecast.fromJson(decodeData);
 }
+
+String replaceDegWithCelsius(String original) {
+  return original.replaceAll("&deg;C", "\u2103");
+}

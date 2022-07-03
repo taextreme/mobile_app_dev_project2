@@ -1,3 +1,5 @@
+import '../utils/data_utils.dart';
+
 class RegionForecast {
   final String regionNameThai;
   final String regionNameEnglish;
@@ -63,19 +65,21 @@ class RegionForecast {
 
   factory RegionForecast.fromMap(Map<String, dynamic> map) {
     return RegionForecast(
-      regionNameThai: map['RegionNameThai'] as String,
-      regionNameEnglish: map['RegionNameEnglish'] as String,
-      descriptionThai: map['DescriptionThai'] as String,
-      descriptionEnglish: map['DescriptionEnglish'] as String,
+      regionNameThai: map['RegionName'] as String,
+      regionNameEnglish: map['RegionNameEng'] as String,
+      descriptionThai: map['Description'] as String,
+      descriptionEnglish: map['DescriptionEng'] as String,
     );
   }
 
   factory RegionForecast.fromJson(dynamic json) {
+    String desTh = json['Description'] as String;
+    String desEn = json['DescriptionEng'] as String;
     return RegionForecast(
-      regionNameThai: json['RegionNameThai'] as String,
-      regionNameEnglish: json['RegionNameEnglish'] as String,
-      descriptionThai: json['DescriptionThai'] as String,
-      descriptionEnglish: json['DescriptionEnglish'] as String,
+      regionNameThai: json['RegionName'] as String,
+      regionNameEnglish: json['RegionNameEng'] as String,
+      descriptionThai: replaceDegWithCelsius(desTh),
+      descriptionEnglish: replaceDegWithCelsius(desEn),
     );
   }
 }

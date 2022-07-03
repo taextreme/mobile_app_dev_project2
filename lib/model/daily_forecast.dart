@@ -13,6 +13,14 @@ class DailyForecast {
     required this.regionsForecast,
   });
 
+  factory DailyForecast.empty() {
+    return const DailyForecast(
+        date: "",
+        overallDescriptionThai: "",
+        overallDescriptionEnglish: "",
+        regionsForecast: []);
+  }
+
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -68,22 +76,22 @@ class DailyForecast {
   factory DailyForecast.fromMap(Map<String, dynamic> map) {
     return DailyForecast(
       date: map['Date'] as String,
-      overallDescriptionThai: map['OverallDescriptionThai'] as String,
-      overallDescriptionEnglish: map['OverallDescriptionEnglish'] as String,
+      overallDescriptionThai: map['DescTh'] as String,
+      overallDescriptionEnglish: map['DescEng'] as String,
       regionsForecast: map['RegionsForecast'] as List<RegionForecast>,
     );
   }
 
   factory DailyForecast.fromJson(dynamic data) {
-    List<dynamic> regionsJson = data['RegionsForecast']['RegionForecast'];
+    List<dynamic> regionsJson = data['RegionsForecast'];
     List<RegionForecast> regions = [];
     for (var element in regionsJson) {
       regions.add(RegionForecast.fromJson(element));
     }
     return DailyForecast(
       date: data['Date'] as String,
-      overallDescriptionThai: data['OverallDescriptionThai'] as String,
-      overallDescriptionEnglish: data['OverallDescriptionEnglish'] as String,
+      overallDescriptionThai: data['DescTh'] as String,
+      overallDescriptionEnglish: data['DescEng'] as String,
       regionsForecast: regions,
     );
   }
