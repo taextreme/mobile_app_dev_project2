@@ -15,7 +15,8 @@ IconData getWeatherIconFromData(String data) {
   } else if (data.contains("thunder") && data.contains("storm")) {
     iconData = WeatherIcons.thunderstorm;
   } else if (data.contains("thundershower") ||
-      data.contains("thundershowers")) {
+      data.contains("thundershowers") ||
+      data.contains("heavy rain")) {
     iconData = WeatherIcons.thunderstorm;
   } else if (data.contains("cloudy")) {
     iconData = WeatherIcons.cloudy;
