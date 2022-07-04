@@ -10,13 +10,12 @@ IconData getWeatherIconFromData(String data) {
     iconData = WeatherIcons.rain;
   } else if (data.contains("rain") && data.contains("wind")) {
     iconData = WeatherIcons.rain_wind;
-  } else if (data.contains("storm")) {
+  } else if (data.contains("storm") || data.contains("heavy rain")) {
     iconData = WeatherIcons.storm_showers;
   } else if (data.contains("thunder") && data.contains("storm")) {
     iconData = WeatherIcons.thunderstorm;
   } else if (data.contains("thundershower") ||
-      data.contains("thundershowers") ||
-      data.contains("heavy rain")) {
+      data.contains("thundershowers")) {
     iconData = WeatherIcons.thunderstorm;
   } else if (data.contains("cloudy")) {
     iconData = WeatherIcons.cloudy;
