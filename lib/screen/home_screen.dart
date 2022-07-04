@@ -67,8 +67,15 @@ class _HomeScreenState extends State<HomeScreen> {
           )
         ]),
         body: ListView(
-          children: createHomePageBody(forecast),
+          children: createHomPageBodyFromLang(forecast, lang),
         ));
+  }
+
+  List<Widget> createHomPageBodyFromLang(DailyForecast forecast, String lang) {
+    if (lang == "TH") {
+      return createHomePageBodyTH(forecast);
+    }
+    return createHomePageBody(forecast);
   }
 
   List<Widget> createHomePageBody(DailyForecast forecast) {
@@ -88,11 +95,32 @@ class _HomeScreenState extends State<HomeScreen> {
       const Text("Regions Forecast",
           textAlign: TextAlign.center, style: TextStyle(fontSize: 28)),
     ];
-    body.addAll(getRegionBaseCards(forecast.regionsForecast));
+    body.addAll(getRegionBaseCards(forecast.regionsForecast, lang));
     return body;
   }
 
-  List<Widget> getRegionBaseCards(List<RegionForecast> data) {
+  List<Widget> createHomePageBodyTH(DailyForecast forecast) {
+    List<Widget> body = <Widget>[
+      createLogoBaseCard(forecast.overallDescriptionEnglish),
+      Container(
+          color: Colors.white,
+          child: Container(
+              alignment: Alignment.topCenter,
+              child:
+                  Text(forecast.date, style: const TextStyle(fontSize: 30)))),
+      Container(
+          color: Colors.white60,
+          child: Text(forecast.overallDescriptionThai,
+              style: const TextStyle(fontSize: 20))),
+      const SizedBox(height: 20),
+      const Text("Regions Forecast",
+          textAlign: TextAlign.center, style: TextStyle(fontSize: 28)),
+    ];
+    body.addAll(getRegionBaseCardsTH(forecast.regionsForecast, lang));
+    return body;
+  }
+
+  List<Widget> getRegionBaseCards(List<RegionForecast> data, String lang) {
     List<Widget> list = [];
     List<Color> colors = [
       Colors.red,
@@ -110,13 +138,49 @@ class _HomeScreenState extends State<HomeScreen> {
           child: BaseCard(
               theOnTapFunc: () {
                 Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return RegionScreen(forecast: regionForecast);
+                  return RegionScreen(
+                    forecast: regionForecast,
+                    lang: lang,
+                  );
                 }));
               },
               theColor: colors[i],
               theChild: Container(
                   alignment: Alignment.center,
                   child: Text(regionForecast.regionNameEnglish,
+                      style: const TextStyle(fontSize: 22))))));
+    }
+    return list;
+  }
+
+  List<Widget> getRegionBaseCardsTH(List<RegionForecast> data, String lang) {
+    List<Widget> list = [];
+    List<Color> colors = [
+      Colors.red,
+      Colors.orange,
+      Colors.yellow,
+      Colors.green,
+      Colors.blue,
+      Colors.indigo,
+      Colors.deepPurple
+    ];
+    for (var i = 0; i < data.length; i++) {
+      RegionForecast regionForecast = data[i];
+      list.add(SizedBox(
+          height: 100,
+          child: BaseCard(
+              theOnTapFunc: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return RegionScreen(
+                    forecast: regionForecast,
+                    lang: lang,
+                  );
+                }));
+              },
+              theColor: colors[i],
+              theChild: Container(
+                  alignment: Alignment.center,
+                  child: Text(regionForecast.regionNameThai,
                       style: const TextStyle(fontSize: 22))))));
     }
     return list;
