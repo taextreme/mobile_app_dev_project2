@@ -31,6 +31,8 @@ dependencies:
     sdk: flutter
   weather_icons: 3.0.0
   xml2json: ^5.3.3
+  animated_toggle_switch: ^0.5.2
+  country_icons: ^2.0.2
 
 
   # The following adds the Cupertino Icons font to your application.

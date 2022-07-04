@@ -64,11 +64,13 @@ class RegionForecast {
   }
 
   factory RegionForecast.fromMap(Map<String, dynamic> map) {
+    String desTh = map['Description'] as String;
+    String desEn = map['DescriptionEng'] as String;
     return RegionForecast(
       regionNameThai: map['RegionName'] as String,
       regionNameEnglish: map['RegionNameEng'] as String,
-      descriptionThai: map['Description'] as String,
-      descriptionEnglish: map['DescriptionEng'] as String,
+      descriptionThai: replaceDegWithCelsius(desTh),
+      descriptionEnglish: replaceDegWithCelsius(desEn),
     );
   }
 

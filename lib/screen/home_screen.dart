@@ -1,3 +1,4 @@
+import 'package:animated_toggle_switch/animated_toggle_switch.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile_app_dev_project2/component/base_card.dart';
 import 'package:mobile_app_dev_project2/model/daily_forecast.dart';
@@ -16,6 +17,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   DailyForecast forecast = DailyForecast.empty();
+  String lang = "ENG";
 
   _HomeScreenState() {
     ApiService().fetchDailyForecast().then((value) => setState(() {
@@ -23,13 +25,47 @@ class _HomeScreenState extends State<HomeScreen> {
         }));
   }
 
+  void setLang(String value) {
+    setState(() {
+      lang = value;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     // use test data
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('THAILAND DAILY FORECAST'),
-        ),
+        appBar: AppBar(title: const Text('THAILAND DAILY FORECAST'), actions: [
+          AnimatedToggleSwitch<String>.dual(
+            current: lang,
+            first: "ENG",
+            second: "TH",
+            dif: -1,
+            borderColor: Colors.transparent,
+            borderWidth: 5.0,
+            height: 55,
+            boxShadow: const [
+              BoxShadow(
+                color: Colors.black26,
+                spreadRadius: 1,
+                blurRadius: 2,
+                offset: Offset(0, 1.5),
+              ),
+            ],
+            textBuilder: (value) => value == "ENG"
+                ? const Center(
+                    child: Text(
+                    'ENG',
+                    style: TextStyle(color: Colors.black),
+                  ))
+                : const Center(
+                    child: Text(
+                    'TH',
+                    style: TextStyle(color: Colors.black),
+                  )),
+            onChanged: (b) => setLang(b),
+          )
+        ]),
         body: ListView(
           children: createHomePageBody(forecast),
         ));
