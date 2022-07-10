@@ -56,10 +56,10 @@ class RegionForecast {
 
   Map<String, dynamic> toMap() {
     return {
-      'RegionNameThai': regionNameThai,
-      'RegionNameEnglish': regionNameEnglish,
-      'DescriptionThai': descriptionThai,
-      'DescriptionEnglish': descriptionEnglish,
+      'RegionName': regionNameThai,
+      'RegionNameEng': regionNameEnglish,
+      'Description': descriptionThai,
+      'DescriptionEng': descriptionEnglish,
     };
   }
 

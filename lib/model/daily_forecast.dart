@@ -67,10 +67,18 @@ class DailyForecast {
   Map<String, dynamic> toMap() {
     return {
       'Date': date,
-      'OverallDescriptionThai': overallDescriptionThai,
-      'OverallDescriptionEnglish': overallDescriptionEnglish,
-      'RegionsForecast': regionsForecast,
+      'DescTh': overallDescriptionThai,
+      'DescEng': overallDescriptionEnglish,
+      'RegionsForecast': regionsForecastToMap(),
     };
+  }
+
+  List<Map<String, dynamic>> regionsForecastToMap() {
+    List<Map<String, dynamic>> result = [];
+    for (var element in regionsForecast) {
+      result.add(element.toMap());
+    }
+    return result;
   }
 
   factory DailyForecast.fromMap(Map<String, dynamic> map) {
