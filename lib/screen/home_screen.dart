@@ -1,9 +1,11 @@
 import 'package:animated_toggle_switch/animated_toggle_switch.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile_app_dev_project2/component/base_card.dart';
+import 'package:mobile_app_dev_project2/data/user_update_data.dart';
 import 'package:mobile_app_dev_project2/model/daily_forecast.dart';
 import 'package:mobile_app_dev_project2/screen/region_screen.dart';
 import 'package:mobile_app_dev_project2/service/api_service.dart';
+import 'package:mobile_app_dev_project2/utils/time_utils.dart';
 import 'package:mobile_app_dev_project2/utils/widget_utils.dart';
 
 import '../model/region_forecast.dart';
@@ -80,6 +82,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   List<Widget> createHomePageBody(DailyForecast forecast) {
     List<Widget> body = <Widget>[
+      createUpdateCard(),
       createLogoBaseCard(forecast.overallDescriptionEnglish),
       Container(
           color: Colors.white,
@@ -101,6 +104,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   List<Widget> createHomePageBodyTH(DailyForecast forecast) {
     List<Widget> body = <Widget>[
+      createUpdateCard(),
       createLogoBaseCard(forecast.overallDescriptionEnglish),
       Container(
           color: Colors.white,
@@ -184,5 +188,35 @@ class _HomeScreenState extends State<HomeScreen> {
                       style: const TextStyle(fontSize: 22))))));
     }
     return list;
+  }
+
+  void updateData() {
+    ApiService().fetchDailyForecast().then((value) => setState(() {
+          forecast = value;
+        }));
+  }
+
+  BaseCard createUpdateCard() {
+    Color color =
+        checkUpdateTime(stringToTime(UserUpdateData.getLastUpdateData()))
+            ? Colors.red
+            : Colors.green;
+    String updateInfo = UserUpdateData.getLastUpdateData();
+    if (lang == "TH") {
+      return BaseCard(
+          theColor: color,
+          theChild: Column(children: [
+            const Icon(Icons.update),
+            Text("อัปเดตล่าสุดเมื่อ $updateInfo")
+          ]),
+          theOnTapFunc: updateData);
+    }
+    return BaseCard(
+        theColor: color,
+        theChild: Column(children: [
+          const Icon(Icons.update),
+          Text("Last Update at $updateInfo")
+        ]),
+        theOnTapFunc: updateData);
   }
 }

@@ -14,3 +14,7 @@ DailyForecast dailyForecastFromXML(String xml) {
 String replaceDegWithCelsius(String original) {
   return original.replaceAll("&deg;C", "\u2103");
 }
+
+String formatDateForFireStore(String date) {
+  return date.replaceAll('/', '-');
+}
