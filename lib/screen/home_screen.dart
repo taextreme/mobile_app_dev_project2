@@ -82,6 +82,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   List<Widget> createHomePageBody(DailyForecast forecast) {
     List<Widget> body = <Widget>[
+      createUpdateCard(),
       createLogoBaseCard(forecast.overallDescriptionEnglish),
       Container(
           color: Colors.white,
@@ -201,6 +202,15 @@ class _HomeScreenState extends State<HomeScreen> {
             ? Colors.red
             : Colors.green;
     String updateInfo = UserUpdateData.getLastUpdateData();
+    if (lang == "TH") {
+      return BaseCard(
+          theColor: color,
+          theChild: Column(children: [
+            const Icon(Icons.update),
+            Text("อัปเดตล่าสุดเมื่อ $updateInfo")
+          ]),
+          theOnTapFunc: updateData);
+    }
     return BaseCard(
         theColor: color,
         theChild: Column(children: [

@@ -82,12 +82,16 @@ class DailyForecast {
   }
 
   factory DailyForecast.fromMap(Map<String, dynamic> map) {
+    List<dynamic> regionsJson = map['RegionsForecast'];
+    List<RegionForecast> regions = [];
+    for (var element in regionsJson) {
+      regions.add(RegionForecast.fromJson(element));
+    }
     return DailyForecast(
-      date: map['Date'] as String,
-      overallDescriptionThai: map['DescTh'] as String,
-      overallDescriptionEnglish: map['DescEng'] as String,
-      regionsForecast: map['RegionsForecast'] as List<RegionForecast>,
-    );
+        date: map['Date'] as String,
+        overallDescriptionThai: map['DescTh'] as String,
+        overallDescriptionEnglish: map['DescEng'] as String,
+        regionsForecast: regions);
   }
 
   factory DailyForecast.fromJson(dynamic data) {
